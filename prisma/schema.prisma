@@ -1,0 +1,80 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// For SQLite (Zero-configuration local testing):
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+// For PostgreSQL (Production):
+// datasource db {
+//   provider = "postgresql"
+//   url      = env("DATABASE_URL")
+// }
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model College {
+  id               String          @id @default(uuid())
+  name             String
+  slug             String          @unique
+  location         String
+  state            String
+  fees             Float
+  rating           Float
+  nirfRanking      Int?
+  description      String
+  image            String
+  establishedYear  Int
+  ownershipType    String          // e.g. "Public", "Private"
+  campusSize       String          // e.g. "200 Acres"
+  averagePlacement Float
+  highestPackage   Float
+  medianPackage    Float
+  createdAt        DateTime        @default(now())
+  
+  courses          Course[]
+  placements       Placement[]
+  reviews          Review[]
+  predictorRules   PredictorRule[]
+}
+
+model Course {
+  id          String   @id @default(uuid())
+  collegeId   String
+  college     College  @relation(fields: [collegeId], references: [id], onDelete: Cascade)
+  courseName  String
+  duration    String   // e.g. "4 Years"
+  fees        Float
+  eligibility String
+}
+
+model Placement {
+  id                  String   @id @default(uuid())
+  collegeId           String
+  college             College  @relation(fields: [collegeId], references: [id], onDelete: Cascade)
+  averagePackage      Float
+  highestPackage      Float
+  placementPercentage Float
+}
+
+model Review {
+  id          String   @id @default(uuid())
+  collegeId   String
+  college     College  @relation(fields: [collegeId], references: [id], onDelete: Cascade)
+  studentName String
+  rating      Float
+  comment     String
+}
+
+model PredictorRule {
+  id        String   @id @default(uuid())
+  examName  String   // e.g. "JEE Main", "JEE Advanced", "NEET", "CAT"
+  minRank   Int
+  maxRank   Int
+  collegeId String
+  college   College  @relation(fields: [collegeId], references: [id], onDelete: Cascade)
+}
