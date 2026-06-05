@@ -4,6 +4,8 @@ import { Search, Sparkles, GitCompare, Landmark, GraduationCap, ArrowRight, Star
 import db from "@/lib/db";
 import CollegeCard from "@/components/CollegeCard";
 
+export const dynamic = "force-dynamic";
+
 async function getFeaturedColleges() {
   try {
     const featured = await db.college.findMany({

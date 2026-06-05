@@ -6,6 +6,8 @@ import Footer from "@/components/Footer";
 import CompareDrawer from "@/components/CompareDrawer";
 import { ClerkProvider } from "@clerk/nextjs";
 
+export const runtime = "edge";
+
 export const metadata: Metadata = {
   title: "CampusIQ | Premium College Discovery & Predictor Platform",
   description: "Explore, search, filter, and compare 40+ top IITs, NITs, IIMs, and Medical universities in India. Predict your dream college using your rank.",
