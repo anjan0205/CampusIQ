@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import db from "@/lib/db";
 
-export const runtime = "edge";
+// export const runtime = "edge"; // Commented out for Vercel deployment
 
 export async function GET(req: NextRequest) {
   try {

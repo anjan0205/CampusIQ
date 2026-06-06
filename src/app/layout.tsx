@@ -6,7 +6,7 @@ import Footer from "@/components/Footer";
 import CompareDrawer from "@/components/CompareDrawer";
 import { ClerkProvider } from "@clerk/nextjs";
 
-export const runtime = "edge";
+// export const runtime = "edge"; // Commented out for Vercel deployment to support Node.js serverless runtime
 
 export const metadata: Metadata = {
   title: "CampusIQ | Premium College Discovery & Predictor Platform",
